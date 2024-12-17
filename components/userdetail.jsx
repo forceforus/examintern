@@ -128,13 +128,13 @@ export default function UserList() {
             onClick={() => handleSortByAge(true)}
             className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition duration-200"
           >
-            Sort by Age (Asc)
+            เรียงน้อย-มาก
           </button>
           <button
             onClick={() => handleSortByAge(false)}
             className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition duration-200"
           >
-            Sort by Age (Desc)
+            เรียงมาก-น้อย
           </button>
         </div>
       </div>
