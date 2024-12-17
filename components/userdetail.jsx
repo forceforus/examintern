@@ -56,12 +56,12 @@ export default function UserList() {
       return;
     }
     try {
-      const response = await fetch(`/api/userdetail/${editingUser}`, {
+      const response = await fetch(`/api/userdetail/${editingUser}`, { // เปลี่ยนจาก userId เป็น editingUser
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, usersurname, date_of_birth: dateOfBirth, income, outcome }),
       });
-
+  
       const result = await response.json();
       if (response.ok) {
         alert('User updated successfully');
@@ -80,6 +80,7 @@ export default function UserList() {
       setError('Error updating user');
     }
   };
+  
 
   const handleDeleteUser = async (userId) => {
     const confirmation = window.confirm('Are you sure you want to delete this user? This action cannot be undone.');
@@ -141,9 +142,10 @@ export default function UserList() {
       <table className="w-full border-collapse">
         <thead>
           <tr className="bg-gray-100 border-b">
+          <th className="p-4 text-left text-sm text-gray-700">Title</th>
             <th className="p-4 text-left text-sm text-gray-700">Username</th>
             <th className="p-4 text-left text-sm text-gray-700">Surname</th>
-            <th className="p-4 text-left text-sm text-gray-700">Title</th>
+            
             <th className="p-4 text-left text-sm text-gray-700">Date of Birth</th>
             <th className="p-4 text-left text-sm text-gray-700">Age</th>
             <th className="p-4 text-left text-sm text-gray-700">Income</th>
@@ -159,9 +161,9 @@ export default function UserList() {
           ) : (
             filteredUsers.map((user) => (
               <tr key={user.user_id} className="border-b">
+                <td className="p-4 text-gray-700">{user.usertype_name}</td>
                 <td className="p-4 text-gray-700">{user.user_name}</td>
                 <td className="p-4 text-gray-700">{user.user_surname}</td>
-                <td className="p-4 text-gray-700">{user.usertype_name}</td>
                 <td className="p-4 text-gray-700">{new Date(user.date_of_birth).toLocaleDateString('en-GB')}</td>
                 <td className="p-4 text-gray-700">{user.age}</td>
                 <td className="p-4 text-gray-700">{user.income}</td>

@@ -1,14 +1,15 @@
-// /app/api/userdetail/[userId]/route.js
 import mysql from 'mysql2/promise';
 
 export async function PUT(request, { params }) {
   const { userId } = params;
-  const { username, usersurname, date_of_birth } = await request.json();
+  const { username, usersurname, date_of_birth, income, outcome } = await request.json();
 
   // ตรวจสอบค่าของฟิลด์และแทนที่ค่าที่เป็น undefined ด้วย null
   const safeUsername = username !== undefined ? username : null;
   const safeUsersurname = usersurname !== undefined ? usersurname : null;
   const safeDateOfBirth = date_of_birth !== undefined ? date_of_birth : null;
+  const safeIncome = income !== undefined ? income : null;
+  const safeOutcome = outcome !== undefined ? outcome : null;
 
   try {
     const connection = await mysql.createConnection({
@@ -20,13 +21,13 @@ export async function PUT(request, { params }) {
 
     const updateQuery = `
       UPDATE user 
-      SET user_name = ?, user_surname = ?, date_of_birth = ?
+      SET user_name = ?, user_surname = ?, date_of_birth = ?, income = ?, outcome = ?
       WHERE user_id = ?;
     `;
     
     // เรียกใช้งานคำสั่ง SQL
     await connection.execute(updateQuery, [
-      safeUsername, safeUsersurname, safeDateOfBirth, userId
+      safeUsername, safeUsersurname, safeDateOfBirth, safeIncome, safeOutcome, userId
     ]);
 
     return new Response(JSON.stringify({ success: true }), { status: 200 });
