@@ -1,13 +1,13 @@
-import Userform from "@/components/form";
+import UserList from "@/components/userdetail";
 import Navbar from "@/components/navbar";
-import "./globals.css";
+import "../globals.css";
 
 export default function Page() {
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
       <div className="flex-1 mt-4">
-        <Userform />
+        <UserList />
       </div>
     </div>
   );
